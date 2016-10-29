@@ -39,6 +39,7 @@
 	[freq.asArray, ratio.asArray, amp.asArray];
 };
 
+/* not in use in this version (can be used interchangeably with Synth(\bpf) )
 SynthDef(\zither,
 	{
 		arg buf, outBus, rate = 1, rateScale = 1, start = 0, amp = 0.1, group = 0, element;
@@ -63,6 +64,7 @@ SynthDef(\zither,
 		FreeSelf.kr(InRange.kr(playhead, bufLength*0.99, bufLength));
 	};
 ).add;
+*/
 
 SynthDef(\bpf,
 	{
@@ -147,14 +149,14 @@ SynthDef(\masterBus,
 		var amp = ~spectra.at(group).at(2).at(element);
 
 		/*
-		/////////////////////
+		///////////////////// 
 		//amplitude threshold
 		while({amp < ~ampThreshold},
 		{
 		element = dummyArray.wchoose(~partialProb.at(group));
 		amp = ~spectra.at(group).at(2).at(element);
 		}
-		); //danger!!! infLoop
+		);
 		/////////////////////
 		*/
 		rate = ~spectra.at(group).at(1).at(element);
@@ -182,10 +184,8 @@ SynthDef(\masterBus,
 );
 //////////////////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////////////////
-//trigger master bus
+//trigger master bus (compression/limiting)
 Synth(\masterBus, [\inBus, ~outBus], addAction: \addToTail);
-//////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////
 //retrigger routine
