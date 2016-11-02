@@ -112,7 +112,7 @@ SynthDef(\masterBus,
 
 //////////////////////////////////////////////////////////////////////////////////
 //variable initialisation
-~fileList = PathName.new(".../mikroskopie/data/").entries; // set path to 'spectra'
+~fileList = PathName.new(".../spectra").entries; // set path to 'spectra' folder
 ~spectra = Array.newFrom([~getFFTData.value(~fileList.at(10).fullPath, 0.5), ~getFFTData.value(~fileList.at(11).fullPath, 0.5)]);
 ~spectrumProb = Array.newFrom([1, 0]); // Probability of choosing first/second spectrum
 ~currentSpectrum = 0;
